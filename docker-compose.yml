@@ -1,0 +1,17 @@
+name: bibliotecas
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: bibliotecas-postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME:-bibliotecas}
+      POSTGRES_USER: ${DB_USER:-bibliotecas}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Define DB_PASSWORD en el archivo .env}
+    ports:
+      - "${DB_PORT:-5434}:5432"
+    volumes:
+      - bibliotecas-datos:/var/lib/postgresql/data
+
+volumes:
+  bibliotecas-datos:
